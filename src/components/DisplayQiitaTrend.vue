@@ -2,6 +2,7 @@
   <div>
     <div v-for="article in articleList" :key="article.index">
       <div class="article-box">
+        <lgtm-button></lgtm-button>
         <img class="article-box-img" :src="article.node.author.profileImageUrl" alt="logo">
         <div class="article-box-content">
           <a class="article-title" :href="article.node.linkUrl">{{ article.node.title }}</a>
@@ -21,9 +22,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
+import LgtmButton from './LgtmButton.vue';
 
 export default Vue.extend({
   name: 'DisplayQiitaTrend',
+  components: {
+    LgtmButton,
+  },
   data() {
     return {
       articleList: Array,
