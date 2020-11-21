@@ -2,7 +2,7 @@
   <div>
     <div v-for="article in articleList" :key="article.index">
       <div class="article-box">
-        <lgtm-button></lgtm-button>
+        <lgtm-button :lgtmCount="article.node.likesCount"></lgtm-button>
         <img class="article-box-img" :src="article.node.author.profileImageUrl" alt="logo">
         <div class="article-box-content">
           <a class="article-title" :href="article.node.linkUrl">{{ article.node.title }}</a>
@@ -32,6 +32,7 @@ export default Vue.extend({
   data() {
     return {
       articleList: Array,
+      lgtmCount: Number,
     }
   },
   created() {
@@ -53,13 +54,15 @@ export default Vue.extend({
 .article-box {
   display: flex;
   align-items: center;
-  padding: 3%;
+  padding: 1%;
   border-bottom: solid 3px #f6f6f6;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 .article-box-img {
   height: 40px;
   width: 40px;
-  background-color: gray;
+  margin-left: 2%;
   border-radius: 25px;
 }
 .article-box-content {
