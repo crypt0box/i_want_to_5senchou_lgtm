@@ -1,14 +1,17 @@
 <template>
   <div>
-    <div>
-      <a 
-        href="#"
-        class="LGTM-button"
-        type="button"
-        @click="isClicked = !isClicked"
-        >
-        <span class="LGTM-button-moji">LG<br>TM</span>
-      </a>
+    <div class="button-container">
+      <span class="button-count">{{ lgtmCount + plusCount }}</span>
+        <div class="button-content">
+        <a 
+          href="#"
+          class="LGTM-button"
+          type="button"
+          @click="increment"
+          >
+          <span class="LGTM-button-moji">LG<br>TM</span>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -18,15 +21,35 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'LgtmButton',
+  props: ['lgtmCount'],
   data() {
     return {
-      isClicked: false,
+      plusCount: 0,
     }
   },
+  methods: {
+    increment() {
+      this.plusCount += 1;
+    }
+  }
 });
 </script>
 
 <style scoped lang="scss">
+.button-container {
+  display: grid;
+  grid-template-rows: 25px 50px;
+  grid-template-columns: 50px;
+}
+.button-count {
+  grid-row: 1 / 2;
+  color: rgb(60, 207, 60);
+  font-weight: bold;
+  text-align: center;
+}
+.button-content {
+  grid-row: 2 / 3;
+}
 .LGTM-button {
   display: inline-block;
   text-decoration: none;
