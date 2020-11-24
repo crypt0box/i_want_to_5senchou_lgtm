@@ -2,7 +2,7 @@
   <div>
     <div v-for="article in articleList" :key="article.index">
       <div class="article-box">
-        <lgtm-button :lgtmCount="article.node.likesCount"></lgtm-button>
+        <lgtm-button :lgtmCount="article.node.likesCount" @plusCount="setPlusCount"></lgtm-button>
         <img class="article-box-img" :src="article.node.author.profileImageUrl" alt="logo">
         <div class="article-box-content">
           <a class="article-title" :href="article.node.linkUrl">{{ article.node.title }}</a>
@@ -10,7 +10,7 @@
             <div class="article-details-author">
               <span>by {{ article.node.author.urlName }}</span>
               <span class="lgtm">LGTM</span>
-              <span class="likes-count">{{ article.node.likesCount }}</span>
+              <span class="likes-count">{{ article.node.likesCount + plusCount }}</span>
             </div>
           </div>
         </div>
@@ -24,15 +24,22 @@ import Vue from 'vue';
 import axios from 'axios';
 import LgtmButton from './LgtmButton.vue';
 
+export type DataType = {
+  articleList: Array<any>;
+  lgtmCount: number;
+  plusCount: number;
+}
+
 export default Vue.extend({
   name: 'DisplayQiitaTrend',
   components: {
     LgtmButton,
   },
-  data() {
+  data(): DataType {
     return {
-      articleList: Array,
-      lgtmCount: Number,
+      articleList: [],
+      lgtmCount: 0,
+      plusCount: 0,
     }
   },
   created() {
@@ -45,6 +52,12 @@ export default Vue.extend({
       .catch(error => {
         console.log('httpリクエストに失敗しました', error)
       });
+  },
+  methods: {
+    setPlusCount(arg: number) {
+      const plusCount = arg;
+      this.plusCount = plusCount;
+    }
   }
 });
 </script>

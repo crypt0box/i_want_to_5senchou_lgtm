@@ -30,6 +30,7 @@ export default Vue.extend({
   methods: {
     increment() {
       this.plusCount += 1;
+      this.$emit('plusCount', this.plusCount);
     }
   }
 });
