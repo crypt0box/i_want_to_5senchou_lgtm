@@ -21,7 +21,8 @@
           <div class="article-details">
             <div class="article-details-author">
               <span>by {{ article.node.author.urlName }}</span>
-              <span class="lgtm">LGTM</span>
+              <span> 1 day ago</span>
+              <span :class="{ colored_lgtm: plusCount[index] }" class="lgtm">LGTM</span>
               <span class="likes-count">{{ article.node.likesCount + plusCount[index] }}</span>
             </div>
           </div>
@@ -124,6 +125,8 @@ export default Vue.extend({
 }
 .article-title {
   font-weight: bold;
+  text-decoration: none;
+  color: black;
 }
 .article-details {
   color: gray;
@@ -131,6 +134,9 @@ export default Vue.extend({
 .lgtm {
   font-weight: bold;
   margin-left: 5px;
+}
+.colored_lgtm {
+  color: rgb(60, 207, 60);
 }
 .likes-count {
   margin-left: 5px;
