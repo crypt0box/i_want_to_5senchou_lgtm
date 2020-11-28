@@ -72,14 +72,22 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.article-box {
-  display: flex;
-  align-items: center;
-  padding: 1%;
-  border-bottom: solid 3px #f6f6f6;
-  margin-left: 20%;
-  margin-right: 20%;
+@media screen and (min-width: 480px) {
+  .article-box {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    border-bottom: solid 3px #f6f6f6;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
 }
+.article-box {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    border-bottom: solid 3px #f6f6f6;
+  }
 .button-container {
   display: grid;
   grid-template-rows: 25px 50px;
