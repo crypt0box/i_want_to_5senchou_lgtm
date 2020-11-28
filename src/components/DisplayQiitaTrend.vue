@@ -9,7 +9,7 @@
               href="#"
               class="LGTM-button"
               type="button"
-              @click="increment(index)"
+              @click.prevent="increment(index)"
               >
               <span class="LGTM-button-moji">LG<br>TM</span>
             </a>
