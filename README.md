@@ -1,29 +1,26 @@
 # i_want_to_5senchou_lgtm
 
-## Project setup
+5000兆回LGTMしたい！<br>
+無限にLGTMできるQiitaクローンアプリです。<br>
+
+サイトURL: https://i-want-to-5senchou-lgtm.netlify.app/
+
+# Usage
 ```
+git clone git@github.com:crypt0box/i_want_to_5senchou_lgtm.git
+cd i_want_to_5senchou_lgtm
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
+
+process.env.VUE_APP_QIITA_TREND_URLにはQiitaのトレンドを取得してくるAPI-URLを記述してください。
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# Requirement
+* TypeScript 3.9.3
+* vue 2.6.11
+* axios 0.21.0
 
-### Run your unit tests
-```
-npm run test:unit
-```
+# Author
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* crypt0box
+* pray.happy76@gmail.com

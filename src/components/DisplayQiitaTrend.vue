@@ -72,7 +72,6 @@ export default Vue.extend({
       .get(process.env.VUE_APP_QIITA_TREND_URL) //qiitaトレンドを取得するAPI-URL
       .then(response => {
         this.articleList = response.data
-        console.log(this.articleList)
       })
       .catch(error => {
         alert('httpリクエストに失敗しました')
