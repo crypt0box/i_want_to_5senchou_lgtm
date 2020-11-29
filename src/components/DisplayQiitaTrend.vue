@@ -1,9 +1,17 @@
 <template>
   <div>
+    <div class="select-box option">
+      <select v-model="selected">
+        <option>無限LGTMモード</option>
+        <option>無限5000兆LGTMモード</option>
+      </select>
+    </div>
     <div v-for="(article, index) in articleList" :key="article.index">
       <div class="article-box">
         <div class="button-container">
-          <span class="button-count">{{ article.node.likesCount + plusCount[index] }}</span>
+          <span class="button-count">
+            {{ (article.node.likesCount + plusCount[index]) >= 5000000000000000 ? '約5000兆' : article.node.likesCount + plusCount[index]}}
+          </span>
             <div class="button-content">
             <a 
               href="#"
@@ -17,7 +25,13 @@
         </div>
         <img class="article-box-img" :src="article.node.author.profileImageUrl" alt="logo">
         <div class="article-box-content">
-          <a class="article-title" :href="article.node.linkUrl">{{ article.node.title }}</a>
+          <a class="article-title" 
+            :href="article.node.linkUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+          {{ article.node.title }}
+          </a>
           <div class="article-details">
             <div class="article-details-author">
               <span>by {{ article.node.author.urlName }}</span>
@@ -40,6 +54,7 @@ export type DataType = {
   articleList: Array<any>;
   lgtmCount: number;
   plusCount: number[];
+  selected: string;
 }
 
 export default Vue.extend({
@@ -49,6 +64,7 @@ export default Vue.extend({
       articleList: [],
       lgtmCount: 0,
       plusCount: new Array(30).fill(0),
+      selected: '無限LGTMモード',
     }
   },
   created() {
@@ -64,7 +80,14 @@ export default Vue.extend({
   },
   methods: {
     increment(index: number) {
-      this.$set(this.plusCount, index, this.plusCount[index] + 1)
+      if (this.selected == '無限LGTMモード') {
+        this.$set(this.plusCount, index, this.plusCount[index] + 1);
+        return;
+      }
+      if (this.plusCount[index] >= 5000000000000000) {
+        return
+      }
+      this.$set(this.plusCount, index, this.plusCount[index] + 5000000000000000)
     }
   }
 });
@@ -73,14 +96,66 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @media screen and (min-width: 480px) {
+  .select-box {
+    overflow: hidden;
+    max-width: 40%;
+    margin: 2em auto;
+    text-align: center;
+  }
   .article-box {
     display: flex;
     align-items: center;
     padding: 1%;
     border-bottom: solid 3px #f6f6f6;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 25%;
+    margin-right: 25%;
   }
+}
+.select-box {
+  overflow: hidden;
+  width: 90%;
+  margin: 2em auto;
+  text-align: center;
+}
+.select-box select {
+	width: 100%;
+	padding-right: 1em;
+	cursor: pointer;
+	text-indent: 0.01px;
+	text-overflow: ellipsis;
+	border: none;
+	outline: none;
+	background: transparent;
+	background-image: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+.select-box select::-ms-expand {
+    display: none;
+}
+.select-box.option {
+	position: relative;
+	border: 1px solid #bbbbbb;
+	border-radius: 2px;
+	background: #ffffff;
+}
+.select-box.option::before {
+	position: absolute;
+	top: 0.8em;
+	right: 0.9em;
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #666666;
+	pointer-events: none;
+}
+.select-box.option select {
+	padding: 8px 38px 8px 8px;
+	color: #666666;
 }
 .article-box {
     display: flex;
@@ -91,16 +166,18 @@ export default Vue.extend({
 .button-container {
   display: grid;
   grid-template-rows: 25px 50px;
-  grid-template-columns: 50px;
+  grid-template-columns: 100px;
 }
 .button-count {
   grid-row: 1 / 2;
   color: rgb(60, 207, 60);
   font-weight: bold;
   text-align: center;
+  white-space: nowrap;
 }
 .button-content {
   grid-row: 2 / 3;
+  text-align: center;
 }
 .LGTM-button {
   display: inline-block;
@@ -125,7 +202,6 @@ export default Vue.extend({
 .article-box-img {
   height: 40px;
   width: 40px;
-  margin-left: 2%;
   border-radius: 25px;
 }
 .article-box-content {
@@ -138,6 +214,7 @@ export default Vue.extend({
 }
 .article-details {
   color: gray;
+  white-space: nowrap;
 }
 .lgtm {
   font-weight: bold;
