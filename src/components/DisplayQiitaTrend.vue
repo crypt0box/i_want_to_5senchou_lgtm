@@ -75,7 +75,7 @@ export default Vue.extend({
         console.log(this.articleList)
       })
       .catch(error => {
-        console.log('httpリクエストに失敗しました', error)
+        alert('httpリクエストに失敗しました')
       });
   },
   methods: {
