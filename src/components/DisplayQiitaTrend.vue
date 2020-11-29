@@ -3,7 +3,7 @@
     <div class="select-box option">
       <select v-model="selected">
         <option>無限LGTMモード</option>
-        <option>無限5000兆LGTMモード</option>
+        <option>5000兆LGTMモード</option>
       </select>
     </div>
     <div v-for="(article, index) in articleList" :key="article.index">
@@ -69,7 +69,7 @@ export default Vue.extend({
   },
   created() {
     axios
-      .get('https://qiita-api.netlify.app/.netlify/functions/trend')
+      .get(process.env.VUE_APP_QIITA_TREND_URL) //qiitaトレンドを取得するAPI-URL
       .then(response => {
         this.articleList = response.data
         console.log(this.articleList)
