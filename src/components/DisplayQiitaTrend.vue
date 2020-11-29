@@ -94,6 +94,22 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@media screen and (min-width: 480px) {
+  .select-box {
+    overflow: hidden;
+    max-width: 40%;
+    margin: 2em auto;
+    text-align: center;
+  }
+  .article-box {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    border-bottom: solid 3px #f6f6f6;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+}
 .select-box {
   overflow: hidden;
   width: 90%;
